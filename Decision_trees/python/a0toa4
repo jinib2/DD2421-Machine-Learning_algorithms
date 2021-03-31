@@ -1,0 +1,80 @@
+import monkdata as m
+import dtree as d
+import drawtree_qt5 as qt
+
+print("Entropy")
+print("MONK-1: ", d.entropy(m.monk1))
+print("MONK-2: ", d.entropy(m.monk2))
+print("MONK-3: ", d.entropy(m.monk3))
+
+print()
+
+print("Information Gain")
+print("MONK-1 a1: ", round(d.averageGain(m.monk1, m.attributes[0]), 3))
+print("MONK-1 a2: ", round(d.averageGain(m.monk1, m.attributes[1]), 3))
+print("MONK-1 a3: ", round(d.averageGain(m.monk1, m.attributes[2]), 3))
+print("MONK-1 a4: ", round(d.averageGain(m.monk1, m.attributes[3]), 3))
+print("MONK-1 a5: ", round(d.averageGain(m.monk1, m.attributes[4]), 3))
+print("MONK-1 a6: ", round(d.averageGain(m.monk1, m.attributes[5]), 3))
+print("MONK-2 a1: ", round(d.averageGain(m.monk2, m.attributes[0]), 3))
+print("MONK-2 a2: ", round(d.averageGain(m.monk2, m.attributes[1]), 3))
+print("MONK-2 a3: ", round(d.averageGain(m.monk2, m.attributes[2]), 3))
+print("MONK-2 a4: ", round(d.averageGain(m.monk2, m.attributes[3]), 3))
+print("MONK-2 a5: ", round(d.averageGain(m.monk2, m.attributes[4]), 3))
+print("MONK-2 a6: ", round(d.averageGain(m.monk2, m.attributes[5]), 3))
+print("MONK-3 a1: ", round(d.averageGain(m.monk3, m.attributes[0]), 3))
+print("MONK-3 a2: ", round(d.averageGain(m.monk3, m.attributes[1]), 3))
+print("MONK-3 a3: ", round(d.averageGain(m.monk3, m.attributes[2]), 3))
+print("MONK-3 a4: ", round(d.averageGain(m.monk3, m.attributes[3]), 3))
+print("MONK-3 a5: ", round(d.averageGain(m.monk3, m.attributes[4]), 3))
+print("MONK-3 a6: ", round(d.averageGain(m.monk3, m.attributes[5]), 3))
+
+print()
+print("Building a tree manually")
+monk1_child1 = d.select(m.monk1, m.attributes[4], 1)
+monk1_child2 = d.select(m.monk1, m.attributes[4], 2)
+monk1_child3 = d.select(m.monk1, m.attributes[4], 3)
+monk1_child4 = d.select(m.monk1, m.attributes[4], 4)
+
+print("Information gain")
+print("MONK1-CHILD-1 a1:", round(d.averageGain(monk1_child1, m.attributes[0]), 3))
+print("MONK1-CHILD-1 a2:", round(d.averageGain(monk1_child1, m.attributes[1]), 3))
+print("MONK1-CHILD-1 a3:", round(d.averageGain(monk1_child1, m.attributes[2]), 3))
+print("MONK1-CHILD-1 a4:", round(d.averageGain(monk1_child1, m.attributes[3]), 3))
+print("MONK1-CHILD-1 a6:", round(d.averageGain(monk1_child1, m.attributes[5]), 3))
+
+print("Most common: ", d.mostCommon(monk1_child1))
+
+print("Information gain")
+print("MONK1-CHILD-2 a1:", round(d.averageGain(monk1_child2, m.attributes[0]), 3))
+print("MONK1-CHILD-2 a2:", round(d.averageGain(monk1_child2, m.attributes[1]), 3))
+print("MONK1-CHILD-2 a3:", round(d.averageGain(monk1_child2, m.attributes[2]), 3))
+print("MONK1-CHILD-2 a4:", round(d.averageGain(monk1_child2, m.attributes[3]), 3))
+print("MONK1-CHILD-2 a6:", round(d.averageGain(monk1_child2, m.attributes[5]), 3))
+
+print("Most common (1):", d.mostCommon(d.select(monk1_child2, m.attributes[3], 1)))
+print("Most common (2):", d.mostCommon(d.select(monk1_child2, m.attributes[3], 2)))
+print("Most common (3):", d.mostCommon(d.select(monk1_child2, m.attributes[3], 3)))
+
+print("Information gain")
+print("MONK1-CHILD-3 a1:", round(d.averageGain(monk1_child3, m.attributes[0]), 3))
+print("MONK1-CHILD-3 a2:", round(d.averageGain(monk1_child3, m.attributes[1]), 3))
+print("MONK1-CHILD-3 a3:", round(d.averageGain(monk1_child3, m.attributes[2]), 3))
+print("MONK1-CHILD-3 a4:", round(d.averageGain(monk1_child3, m.attributes[3]), 3))
+print("MONK1-CHILD-3 a6:", round(d.averageGain(monk1_child3, m.attributes[5]), 3))
+
+print("Most common (1):", d.mostCommon(d.select(monk1_child3, m.attributes[5], 1)))
+print("Most common (2):", d.mostCommon(d.select(monk1_child3, m.attributes[5], 2)))
+
+print("Information gain")
+print("MONK1-CHILD-4 a1:", round(d.averageGain(monk1_child4, m.attributes[0]), 3))
+print("MONK1-CHILD-4 a2:", round(d.averageGain(monk1_child4, m.attributes[1]), 3))
+print("MONK1-CHILD-4 a3:", round(d.averageGain(monk1_child4, m.attributes[2]), 3))
+print("MONK1-CHILD-4 a4:", round(d.averageGain(monk1_child4, m.attributes[3]), 3))
+print("MONK1-CHILD-4 a6:", round(d.averageGain(monk1_child4, m.attributes[5]), 3))
+
+print("Most common (1):", d.mostCommon(d.select(monk1_child4, m.attributes[0], 1)))
+print("Most common (2):", d.mostCommon(d.select(monk1_child4, m.attributes[0], 2)))
+print("Most common (3):", d.mostCommon(d.select(monk1_child4, m.attributes[0], 3)))
+
+qt.drawTree(d.buildTree(m.monk1, m.attributes, 2))
